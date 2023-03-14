@@ -3,33 +3,37 @@ import axios, { Axios } from 'axios'
 import { Navigate } from 'react-router-dom'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useContext } from 'react'
+import AuthContext from '../context/AuthContext'
 export const Login = () => {
-const [username,setUsername]=useState("")
-const [password,setPassword]=useState("")
-const [navigate,setNavigate]=useState(false)
+// const [username,setUsername]=useState("")
+// const [password,setPassword]=useState("")
+// const [navigate,setNavigate]=useState(false)
 
-const submit= async (e)=>{
+let {username,setUsername,setPassword,password,submitLogin}=useContext(AuthContext)
+//const submit=submitLogin(e)
+// async (e)=>{
 
-  e.preventDefault();
-  const {data}=await axios.post("http://127.0.0.1:8000/api/token/",
-  {
-username:username,
-password:password
-  }, {withCredentials:true});
-  //console.log(data.access)
- axios.defaults.headers.common['Authorization']=`Bearer ${data['access']}`
-  //console.log(response.data)
-  setNavigate(true)
+//   e.preventDefault();
+//   const {data}=await axios.post("api/token/",
+//   {
+// username:username,
+// password:password
+//   }, {withCredentials:true});
+//   //console.log(data.access)
+//  axios.defaults.headers.common['Authorization']=`Bearer ${data['access']}`
+//   //console.log(response.data)
+//   setNavigate(true)
 
-  if(navigate){
-    return <Navigate to='/' />
-  }
+//   if(navigate){
+//     return <Navigate to='/' />
+//   }
 
  
 
-}
+// }
 
-  return (
+return (
     <div>
 <header className="p-3 bg-dark">
     <div className="container">
@@ -56,7 +60,7 @@ password:password
 
     <main className="form-signin w-100 m-auto">
           
-    <form onSubmit={submit} >
+    <form onSubmit={e=>submitLogin(e)} >
       <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
   
       
