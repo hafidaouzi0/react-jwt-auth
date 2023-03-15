@@ -18,8 +18,8 @@ export const Home = () => {
         const { data } = await axios.get("profile/");
         setUsername(data.username);
         console.log(data.username);
+        setNavigate(false)
       }catch(e){
-        setNavigate(true)
         console.log("true in useffect")
       }
       
@@ -35,10 +35,13 @@ export const Home = () => {
       );
       setNavigate(true);
       console.log("true in logout")
-  
+      localStorage.removeItem(savedRefreshToken)
+      console.log("remove token")
+
     };
   
   if (navigate){
+   
     return <Navigate to='/login' />
   }
 
@@ -86,13 +89,13 @@ export const Home = () => {
               </Link>
             </div>
             <div>
-              <a
-                href="javascript:void(0)"
+              <button
+               
                 onClick={logout}
                 className="btn btn-lg me-2 btn-primary"
               >
                 Logout
-              </a>
+              </button>
             </div>
           </div>
         </div>
